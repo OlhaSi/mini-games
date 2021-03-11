@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Animation</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="goHome">
+    <a href="./index.html">Go Home</a>
+</div>
+
+<canvas id="canvas" width="200" height="200"></canvas>
+
+<script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+
+    let positionX = 0;
+    let positionY = 0;
+
+    let size = 0;
+
+    // rectangle animation
+    /*setInterval(function () {
+        ctx.clearRect(0, 0, 200, 200);
+        ctx.fillRect(positionX, positionY, size, size);
+
+        // move element x, y or xy direction
+        /!*positionX++;
+        positionY++;*!/
+
+       // make an element bigger till 200
+        size++;
+        if (size > 200) {
+            /!*positionX = 0;
+            positionY = 0;*!/
+            size = 0;
+        }
+    }, 30);*/
+
+    // bee animation
+    let x = 100;
+    let y = 100;
+
+    function circle(x, y, radius, fillCircle) {
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+        if (fillCircle) {
+            ctx.fill();
+        } else {
+            ctx.stroke();
+        }
+    }
+
+    function drawBee(x, y) {
+        ctx.lineWidth = 2;
+        ctx.fillStyle = "gold";
+
+        // draw body
+        circle(x, y, 8, true);
+        circle(x, y, 8, false);
+        // draw wings
+        circle(x - 5, y - 11, 5, false);
+        circle(x + 5, y - 11, 5, false);
+        // draw eyes
+        circle(x - 2, y - 1, 2, false);
+        circle(x + 2, y - 1, 2, false);
+    }
+
+    function update(coordinate) {
+        let offset = Math.random() * 4 - 2;
+        coordinate += offset;
+
+        if (coordinate > 200) {
+            coordinate = 200;
+        }
+        if (coordinate < 0) {
+            coordinate = 0;
+        }
+
+        return coordinate;
+    }
+
+    setInterval(function () {
+        ctx.clearRect(0, 0, 200, 200);
+        drawBee(x, y);
+        x = update(x);
+        y = update(y);
+
+        ctx.strokeRect(0, 0, 200, 200);
+    }, 30);
+
+</script>
+
+</body>
+</html>

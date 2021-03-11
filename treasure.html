@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find the buried treasure!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="goHome">
+    <a href="./index.html">Go Home</a>
+</div>
+
+<h1 id="heading">Find the buried treasure!</h1>
+
+<img id="map" width="400" height="400" src="./img/treasuremap.webp" alt=""/>
+
+<p id="distance"></p>
+
+<script>
+
+    let width = 400;
+    let height = 400;
+
+    function getRandomNumber(size) {
+        return Math.floor(Math.random() * size);
+    }
+
+    let target = {
+        x: getRandomNumber(width),
+        y: getRandomNumber(height)
+    };
+
+    function getDistance(event, target) {
+        let diffX = event.offsetX - target.x;
+        let diffY = event.offsetY - target.y;
+        return Math.sqrt((diffX * diffX) + (diffY * diffY));
+    }
+
+    function getDistanceHint(distance) {
+        if (distance < 10) {
+            return "Boiling hot! You have " + triesCounter + " tries more.";
+        } else if (distance < 20) {
+            return "Really hot! You have " + triesCounter + " tries more.";
+        } else if (distance < 40) {
+            return "Hot! You have " + triesCounter + " tries more.";
+        } else if (distance < 80) {
+            return "Warm! You have " + triesCounter + " tries more.";
+        } else if (distance < 160) {
+            return "Cold! You have " + triesCounter + " tries more.";
+        } else if (distance < 320) {
+            return "Really cold! You have " + triesCounter + " tries more.";
+        } else
+            return "Freezing! You have " + triesCounter + " tries more.";
+    }
+
+    let clicks = 0;
+    let limit = 15;
+    let triesCounter = limit - clicks;
+
+    $("#map").click(function (event) {
+        clicks++;
+        triesCounter--;
+
+        let distance = getDistance(event, target);
+        let distanceHint = getDistanceHint(distance);
+        $("#distance").text(distanceHint);
+
+        if (clicks >= limit) {
+            alert("Game over!");
+        }
+        if (distance < 8) {
+            alert("Congrats! Found the treasure in " + clicks + " clicks!");
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

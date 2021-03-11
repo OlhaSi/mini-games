@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Bouncing Ball</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<div class="goHome">
+    <a href="./index.html">Go Home</a>
+</div>
+
+<canvas id="canvas" width="500" height="500"></canvas>
+
+<script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+
+    let width = canvas.width;
+    let height = canvas.height;
+
+    let Ball = function () {
+        this.x = width / 2;
+        this.y = height / 2;
+        this.xSpeed = -2;
+        this.ySpeed = 3;
+    }
+
+    function circle(x, y, radius, fillCircle) {
+        ctx.fillStyle = "blue";
+        ctx.strokeStyle = "green";
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+        if (fillCircle) {
+            ctx.fill();
+        } else {
+            ctx.stroke();
+        }
+    }
+
+    Ball.prototype.draw = function () {
+        circle(this.x, this.y, 5, true);
+    };
+    Ball.prototype.move = function () {
+        this.x += this.xSpeed;
+        this.y += this.ySpeed;
+    };
+    Ball.prototype.checkCollision = function () {
+        if (this.x < 0 || this.x > width) {
+            this.xSpeed = -this.xSpeed;
+        }
+        if (this.y < 0 || this.y > height) {
+            this.ySpeed = -this.ySpeed;
+        }
+    };
+
+    let ball = new Ball();
+
+    setInterval(function () {
+        ctx.clearRect(0, 0, width, height);
+
+        ball.draw();
+        ball.move();
+        ball.checkCollision();
+
+        ctx.strokeRect(0, 0, width, height);
+    }, 20);
+
+
+</script>
+
+</body>
+</html>

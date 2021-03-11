@@ -1,0 +1,19 @@
+.goHome {
+    padding: 10px;
+}
+
+.goHome a {
+    color: blue;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.gameLink {
+    padding: 10px;
+}
+
+.gameLink a {
+    color: red;
+    font-size: 20px;
+    text-decoration: none;
+}
