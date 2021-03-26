@@ -1,11 +1,43 @@
+header {
+    display: block;
+    margin: 25px;
+    padding: 2px;
+    text-transform: uppercase;
+    text-shadow: cornsilk;
+    color: darkslategray;
+    background: lavender;
+}
+
+body {
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: darkslategray;
+    text-decoration: underline;
+}
+
+.btn {
+    background-color: lightslategrey;
+    border: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: dimgray;
+}
+
 .goHome {
     padding: 10px;
 }
 
 .goHome a {
-    color: blue;
-    font-size: 20px;
     text-decoration: none;
+    color: white;
 }
 
 .gameLink {
@@ -13,7 +45,11 @@
 }
 
 .gameLink a {
-    color: red;
+    color: darkslateblue;
     font-size: 20px;
     text-decoration: none;
+}
+
+.gameLink a:hover {
+    color: cornflowerblue;
 }
